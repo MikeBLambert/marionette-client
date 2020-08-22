@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "clean:install": "rm -rf ./node_modules  && yarn install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -10,8 +11,24 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@apollo/client": "^3.1.3",
+    "@react-native-community/async-storage": "^1.12.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/drawer": "^5.9.0",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
+    "@types/lodash": "^4.14.159",
+    "graphql": "^15.3.0",
+    "lodash": "^4.17.20",
     "react": "16.13.1",
-    "react-native": "0.63.2"
+    "react-native": "0.63.2",
+    "react-native-elements": "^2.2.1",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-reanimated": "^1.13.0",
+    "react-native-safe-area-context": "^3.1.6",
+    "react-native-screens": "^2.10.1",
+    "react-native-vector-icons": "^7.0.0",
+    "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -25,6 +42,7 @@
     "eslint": "^7.7.0",
     "jest": "^26.4.0",
     "metro-react-native-babel-preset": "^0.62.0",
+    "react-addons-test-utils": "^15.6.2",
     "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "16.13.1",
     "ts-jest": "^26.2.0",
