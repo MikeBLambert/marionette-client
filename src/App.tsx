@@ -7,20 +7,23 @@ import UserProvider from './context/UserProvider';
 import UserContext from './context/UserContext';
 import useClient from './graphql';
 import RootNavigator from './navigations';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App: () => React.ReactElement = () => {
   const client = useClient();
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <UserProvider>
-        <ApolloProvider client={client}>
-          <UserContext.Consumer>
-            {(context) => <RootNavigator token={context.user.token} />}
-          </UserContext.Consumer>
-        </ApolloProvider>
-      </UserProvider>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={{flex: 1}}>
+        <UserProvider>
+          <ApolloProvider client={client}>
+            <UserContext.Consumer>
+              {(context) => <RootNavigator token={context.user.token} />}
+            </UserContext.Consumer>
+          </ApolloProvider>
+        </UserProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView} from 'react-native';
-import {Input, Button} from 'react-native-elements';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, {useState, useEffect, useContext} from 'react';
+import {Input} from 'react-native-elements';
 import {useMutation, gql} from '@apollo/client';
+import {StackNavigationHelpers} from '@react-navigation/stack/lib/typescript/src/types';
+import AuthForm from '../../components/organisms/AuthForm';
+import UserContext from '../../context/UserContext';
 
 const SIGN_UP = gql`
   mutation SignUp($email: String!, $password: String!, $username: String!) {
@@ -17,9 +18,12 @@ const SIGN_UP = gql`
   }
 `;
 
-interface Props {}
+interface Props {
+  navigation: StackNavigationHelpers;
+}
 
-const SignUp = () => {
+const SignUp = ({navigation}: Props) => {
+  const context = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,22 +35,22 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (!data) return;
-    console.log({data});
-
+    if (!data) {
+      return;
+    }
     const userData = data.signUp;
-
     const {token, user} = userData;
     const {email: userEmail, _id} = user && user;
-
-    AsyncStorage.setItem(
-      'user',
-      JSON.stringify({token, email: userEmail, _id}),
-    );
-  }, [data]);
+    context.setUser({token, email: userEmail, _id});
+  }, [data, context]);
 
   return (
-    <ScrollView>
+    <AuthForm
+      submitButtonTitle="Sign Up"
+      switchText="Already have an account?"
+      switchButtonText="Sign In"
+      onSubmit={handleSignUp}
+      onSwitchButtonPress={() => navigation.navigate('SignIn')}>
       <Input
         value={email}
         onChangeText={(text) => setEmail(text)}
@@ -66,8 +70,7 @@ const SignUp = () => {
         accessibilityLabel="password"
         placeholder="Password"
       />
-      <Button title="Sign Up" onPress={handleSignUp} />
-    </ScrollView>
+    </AuthForm>
   );
 };
 

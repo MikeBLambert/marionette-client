@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Icon} from 'react-native-elements';
-import Conversations from '../containers/Conversations';
+import Groups from '../screens/groups';
 
 const Stack = createStackNavigator();
 
@@ -9,8 +9,8 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Conversations"
-        component={Conversations}
+        name="Groups"
+        component={Groups}
         options={({navigation}) => ({
           headerRight: () => {
             return (

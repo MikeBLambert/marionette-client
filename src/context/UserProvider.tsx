@@ -1,13 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FunctionComponent} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import UserContext from './UserContext';
 
-const UserProvider = ({children}) => {
-  const [user, setUser] = useState({token: '', _id: '', email: ''});
+export const LOGGED_OUT_USER = {token: '', _id: '', email: ''};
+
+const UserProvider: FunctionComponent = ({children}) => {
+  const [user, setUser] = useState(LOGGED_OUT_USER);
 
   useEffect(() => {
     getUser();
   }, []);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    AsyncStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
 
   const getUser = async () => {
     const storedUser = (await AsyncStorage.getItem('user')) || '';
@@ -20,8 +29,6 @@ const UserProvider = ({children}) => {
       {children}
     </UserContext.Provider>
   );
-
-  // return context;
 };
 
 export default UserProvider;
