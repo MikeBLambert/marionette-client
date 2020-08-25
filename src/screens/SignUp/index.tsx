@@ -66,7 +66,6 @@ const SignUp = ({navigation}: Props) => {
       <Input
         value={password}
         onChangeText={(text) => setPassword(text)}
-        onChange={(e) => console.log(e)}
         accessibilityLabel="password"
         placeholder="Password"
       />

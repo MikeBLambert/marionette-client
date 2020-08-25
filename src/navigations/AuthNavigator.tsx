@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import SignIn from '../screens/sign-in';
-import SignUp from '../screens/sign-up';
+import SignIn from '../screens/SignIn';
+import SignUp from '../screens/SignUp';
 
 interface Props {}
 

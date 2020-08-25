@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Icon} from 'react-native-elements';
-import Groups from '../screens/groups';
+import Groups from '../screens/Groups';
 
 const Stack = createStackNavigator();
 

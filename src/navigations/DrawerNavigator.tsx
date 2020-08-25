@@ -1,13 +1,9 @@
-import React, {useContext} from 'react';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import React, {useContext, Fragment} from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import AppNavigator from './AppNavigator';
 import UserContext from '../context/UserContext';
-import {LOGGED_OUT_USER} from '../context/UserProvider';
+import {View} from 'react-native';
+import {ListItem} from 'react-native-elements';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,15 +12,19 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Groups"
-      drawerContent={(props) => {
+      drawerPosition="right"
+      overlayColor="none"
+      drawerStyle={{height: 100, flex: 0}}
+      drawerContent={() => {
         return (
-          <DrawerContentScrollView {...props}>
-            <DrawerItemList {...props} />
-            <DrawerItem
-              label="Log Out"
-              onPress={() => context.setUser(LOGGED_OUT_USER)}
-            />
-          </DrawerContentScrollView>
+          <View>
+            <ListItem title="Settings" bottomDivider>
+              Settings
+            </ListItem>
+            <ListItem title="Log Out" onPress={() => context.logOut()}>
+              Log Out
+            </ListItem>
+          </View>
         );
       }}>
       <Drawer.Screen name="Groups" component={AppNavigator} />

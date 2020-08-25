@@ -20,12 +20,17 @@ const UserProvider: FunctionComponent = ({children}) => {
 
   const getUser = async () => {
     const storedUser = (await AsyncStorage.getItem('user')) || '';
-    console.log({storedUser});
-    if (!storedUser) return;
+    if (!storedUser) {
+      return;
+    }
     setUser(JSON.parse(storedUser));
   };
+
+  const logOut = () => {
+    setUser(LOGGED_OUT_USER);
+  };
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{user, setUser, logOut}}>
       {children}
     </UserContext.Provider>
   );
