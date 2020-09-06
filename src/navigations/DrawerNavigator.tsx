@@ -1,9 +1,10 @@
-import React, {useContext, Fragment} from 'react';
+import React, {useContext} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AppNavigator from './AppNavigator';
 import UserContext from '../context/UserContext';
 import {View} from 'react-native';
 import {ListItem} from 'react-native-elements';
+import {SCREENS} from './contants';
 
 const Drawer = createDrawerNavigator();
 
@@ -11,7 +12,7 @@ const DrawerNavigator = () => {
   const context = useContext(UserContext);
   return (
     <Drawer.Navigator
-      initialRouteName="Groups"
+      initialRouteName={SCREENS.groups}
       drawerPosition="right"
       overlayColor="none"
       drawerStyle={{height: 100, flex: 0}}

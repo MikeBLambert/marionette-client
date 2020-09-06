@@ -1,32 +1,62 @@
-import React from 'react';
+import React, {
+  useContext,
+  useEffect,
+  FunctionComponent,
+  useCallback,
+} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
 import PlusFab from '../../components/organisms/PlusFab';
+import {SCREENS} from '../../navigations/contants';
+import UserContext from '../../context/UserContext';
+import {gql, useQuery, useLazyQuery} from '@apollo/client';
+import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 
-interface Props {}
+interface Props {
+  navigation: NavigationProp<any>;
+}
 
-const Groups = () => {
+const GROUPS = gql`
+  query FETCH_GROUPS($_id: ID!) {
+    groups(input: {_id: $_id}) {
+      _id
+      name
+    }
+  }
+`;
+
+const Groups: FunctionComponent<Props> = ({navigation}) => {
+  const {user} = useContext(UserContext);
+  const [fetchGroups, {data}] = useLazyQuery(GROUPS, {
+    fetchPolicy: 'network-only',
+  });
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchGroups({
+        variables: {_id: user._id},
+      });
+    }, []),
+  );
+  const renderGroups = () => {
+    if (!data || !data.groups) {
+      return;
+    }
+    return data.groups.map(({name}: {name: string}, i: number) => (
+      <ListItem
+        key={`${name}-${i}`}
+        title={name}
+        children={{}}
+        topDivider
+        bottomDivider
+      />
+    ));
+  };
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="First Group" children={{}} topDivider bottomDivider />
-        <ListItem title="Last Group" children={{}} topDivider bottomDivider />
-      </ScrollView>
-      <PlusFab onPress={() => console.log('HI!!!')} />
+      <ScrollView>{renderGroups()}</ScrollView>
+      <PlusFab onPress={() => navigation.navigate(SCREENS.groupSettings)} />
     </View>
   );
 };

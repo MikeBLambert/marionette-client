@@ -25,6 +25,7 @@ const useClient = () => {
 
   const errorLink = onError(
     ({response, graphQLErrors, networkError, ...rest}) => {
+      console.log({response, graphQLErrors, networkError, rest});
       // console.log({rest, graphQLErrors, networkError});
       // response.error = graphQLErrors;
     },
@@ -56,7 +57,7 @@ const useClient = () => {
 
   const link = ApolloLink.from([errorLink, authLink, connectionLinks]);
 
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({});
 
   return new ApolloClient({
     // link: errorLink.concat(authLink.concat(httpLink)),

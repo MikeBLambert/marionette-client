@@ -4,6 +4,7 @@ import {useMutation, gql} from '@apollo/client';
 import AuthForm from '../../components/organisms/AuthForm';
 import {StackNavigationHelpers} from '@react-navigation/stack/lib/typescript/src/types';
 import UserContext from '../../context/UserContext';
+import {SCREENS} from '../../navigations/contants';
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -49,7 +50,7 @@ const SignIn = ({navigation}: Props) => {
       switchText="Don't have an account?"
       switchButtonText="Sign Up"
       onSubmit={handleSignIn}
-      onSwitchButtonPress={() => navigation.navigate('SignUp')}>
+      onSwitchButtonPress={() => navigation.navigate(SCREENS.signUp)}>
       <Input
         value={email}
         onChangeText={(text) => setEmail(text)}
