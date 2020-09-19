@@ -2,9 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-interface Props {}
-
-const LogoView = (props: Props) => {
+const LogoView = () => {
   return (
     <View style={styles.container}>
       <Icon name="group" color="blue" size={50} />

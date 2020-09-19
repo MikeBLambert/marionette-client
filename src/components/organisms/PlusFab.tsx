@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
-import CircularFab from '../molecules/CircularFab';
 import {Icon} from 'react-native-elements';
+import CircularFab from '../molecules/CircularFab';
 
 interface Props {
   onPress: (props: any) => any;
@@ -9,7 +9,7 @@ interface Props {
 const PlusFab: FunctionComponent<Props> = ({onPress}) => {
   return (
     <CircularFab onPress={onPress}>
-      <Icon name="plus" type="antdesign" color="white" />
+      <Icon name="plus" color="white" type="antdesign" />
     </CircularFab>
   );
 };

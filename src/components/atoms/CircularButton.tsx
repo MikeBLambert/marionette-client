@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 65,
     height: 65,
     justifyContent: 'center',
-    alignSelf: 'flex-end',
+    // alignSelf: 'flex-end',
     bottom: 20,
     right: 20,
     zIndex: 50,
