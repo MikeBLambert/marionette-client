@@ -69,7 +69,7 @@ module.exports = {
       '.web.js',
       '.jsx',
       '.js',
-    ], // read files in fillowing order
+    ],
     alias: Object.assign({
       'react-native$': 'react-native-web',
     }),
