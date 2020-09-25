@@ -1,16 +1,11 @@
-import React, {
-  useContext,
-  useEffect,
-  FunctionComponent,
-  useCallback,
-} from 'react';
+import React, {useContext, FunctionComponent, useCallback} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
 import PlusFab from '../../components/organisms/PlusFab';
 import {SCREENS} from '../../navigations/contants';
 import UserContext from '../../context/UserContext';
-import {gql, useQuery, useLazyQuery} from '@apollo/client';
+import {gql, useLazyQuery} from '@apollo/client';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 
 interface Props {
@@ -55,7 +50,7 @@ const Groups: FunctionComponent<Props> = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <ScrollView>{renderGroups()}</ScrollView>
+      <ScrollView style={styles.scrollView}>{renderGroups()}</ScrollView>
       <PlusFab onPress={() => navigation.navigate(SCREENS.groupSettings)} />
     </View>
   );
@@ -64,6 +59,9 @@ const Groups: FunctionComponent<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollView: {
+    overflow: 'scroll',
   },
 });
 export default Groups;

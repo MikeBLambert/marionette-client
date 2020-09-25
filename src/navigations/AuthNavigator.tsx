@@ -4,8 +4,6 @@ import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import {SCREENS} from './contants';
 
-interface Props {}
-
 const Stack = createStackNavigator();
 const AuthNavigator = () => {
   return (
