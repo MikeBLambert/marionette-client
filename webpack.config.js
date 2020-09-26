@@ -7,7 +7,7 @@ const webpackEnv = process.env.NODE_ENV || 'development';
 console.log({
   rootDir,
   path,
-  pathResolve: path.resolve(process.env.OUTPUT || rootDir, 'dist'),
+  pathResolve: outputPath,
 });
 
 const outputPath = process.env.OUTPUT
