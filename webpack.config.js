@@ -9,13 +9,16 @@ console.log({
   path,
   pathResolve: path.resolve(process.env.OUTPUT || rootDir, 'dist'),
 });
+
+const outputPath = process.env.OUTPUT || path.resolve(rootDir, 'dist');
+
 module.exports = {
   mode: webpackEnv,
   entry: {
     app: path.join(rootDir, './index.web.ts'),
   },
   output: {
-    path: path.resolve(process.env.OUTPUT || rootDir, 'dist'),
+    path: outputPath,
     filename: 'app-[hash].bundle.js',
   },
   devtool: 'source-map',
