@@ -6,7 +6,7 @@
     "clean:install": "rm -rf ./node_modules  && yarn install",
     "android": "react-native run-android",
     "web": "cd web && webpack-dev-server",
-    "build-web": "rm -rf ./dist && yarn run webpack",
+    "build-web": "rm -rf ./dist && cd web && yarn run webpack",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
