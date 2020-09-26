@@ -17,7 +17,7 @@ console.log({
 module.exports = {
   mode: webpackEnv,
   entry: {
-    app: path.join(rootDir, './index.web.ts'),
+    app: path.join(rootDir, './index.web.js'),
   },
   output: {
     path: outputPath,
