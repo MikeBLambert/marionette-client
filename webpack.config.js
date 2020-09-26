@@ -10,7 +10,9 @@ console.log({
   pathResolve: path.resolve(process.env.OUTPUT || rootDir, 'dist'),
 });
 
-const outputPath = process.env.OUTPUT || path.resolve(rootDir, 'dist');
+const outputPath = process.env.OUTPUT
+  ? path.resolve(process.env.OUTPUT)
+  : path.resolve(rootDir, 'dist');
 
 module.exports = {
   mode: webpackEnv,
