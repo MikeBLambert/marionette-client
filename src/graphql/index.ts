@@ -35,12 +35,12 @@ const useClient = () => {
     uri: 'https://10.0.0.6:4000/graphql',
   });
 
-  const wsLink = new WebSocketLink({
-    uri: 'ws://10.0.0.6/graphql',
-    options: {
-      reconnect: true,
-    },
-  });
+  // const wsLink = new WebSocketLink({
+  //   uri: 'ws://10.0.0.6/graphql',
+  //   options: {
+  //     reconnect: true,
+  //   },
+  // });
 
   const connectionLinks = split(
     // split based on operation type
