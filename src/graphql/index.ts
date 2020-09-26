@@ -32,7 +32,7 @@ const useClient = () => {
   );
 
   const httpLink = new HttpLink({
-    uri: 'http://10.0.0.6:4000/graphql',
+    uri: 'https://10.0.0.6:4000/graphql',
   });
 
   const wsLink = new WebSocketLink({
@@ -51,7 +51,7 @@ const useClient = () => {
         definition.operation === 'subscription'
       );
     },
-    wsLink,
+    // wsLink,
     httpLink,
   );
 
