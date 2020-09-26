@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const rootDir = path.join(__dirname);
+const rootDir = process.env.OUTPUT || path.join(__dirname);
 const webpackEnv = process.env.NODE_ENV || 'development';
 
 console.log({rootDir});
