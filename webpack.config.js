@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const rootDir = process.env.OUTPUT || path.join(__dirname);
+const rootDir = path.join(__dirname);
 const webpackEnv = process.env.NODE_ENV || 'development';
 
 console.log({rootDir});
@@ -11,7 +11,7 @@ module.exports = {
     app: path.join(rootDir, './index.web.ts'),
   },
   output: {
-    path: path.resolve(rootDir, 'dist'),
+    path: path.resolve(process.env.OUTPUT || rootDir, 'dist'),
     filename: 'app-[hash].bundle.js',
   },
   devtool: 'source-map',
