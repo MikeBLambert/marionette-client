@@ -61,6 +61,7 @@ module.exports = {
   ],
   resolve: {
     extensions: [
+      'index.tsx',
       '.web.tsx',
       '.web.ts',
       '.tsx',
