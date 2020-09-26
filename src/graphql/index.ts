@@ -6,7 +6,7 @@ import {
   ApolloLink,
   split,
 } from '@apollo/client';
-import {WebSocketLink} from '@apollo/client/link/ws';
+// import {WebSocketLink} from '@apollo/client/link/ws';
 import {setContext} from '@apollo/client/link/context';
 import {onError} from '@apollo/client/link/error';
 import {getMainDefinition} from '@apollo/client/utilities';
