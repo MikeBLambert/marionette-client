@@ -11,7 +11,7 @@ console.log({
 });
 
 const outputPath = process.env.OUTPUT
-  ? path.resolve(process.env.OUTPUT)
+  ? path.resolve(process.env.OUTPUT, 'dist')
   : path.resolve(rootDir, 'dist');
 
 module.exports = {
