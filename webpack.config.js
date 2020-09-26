@@ -4,15 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootDir = path.join(__dirname);
 const webpackEnv = process.env.NODE_ENV || 'development';
 
+const outputPath = process.env.OUTPUT
+  ? path.resolve(process.env.OUTPUT, 'dist')
+  : path.resolve(rootDir, 'dist');
+
 console.log({
   rootDir,
   path,
   pathResolve: outputPath,
 });
-
-const outputPath = process.env.OUTPUT
-  ? path.resolve(process.env.OUTPUT, 'dist')
-  : path.resolve(rootDir, 'dist');
 
 module.exports = {
   mode: webpackEnv,
