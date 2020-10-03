@@ -5,11 +5,12 @@ import {StyleSheet, View} from 'react-native';
 import AddThingFab from '../../components/organisms/AddThingFab';
 import EditMember from './EditMember';
 import MemberList from './MemberList';
-import {useMutation, gql} from '@apollo/client';
+import {gql} from '@apollo/client';
 import UserContext from '../../context/UserContext';
 import {Input, Icon} from 'react-native-elements';
 import {SCREENS} from '../../navigations/contants';
 import {NavigationProp} from '@react-navigation/native';
+import useAuth from '../../hooks/useAuth';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -33,11 +34,12 @@ export type MemberType = {
 
 const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
   const {user} = useContext(UserContext);
+  const {useMutation} = useAuth();
   const [isEditVisible, setIsEditModalVisible] = useState(false);
   const [editingMember, setEditingMember] = useState('');
   const [name, setName] = useState('');
   const [memberData, setMemberData] = useState<{[key: string]: MemberType}>({});
-  const [createGroup] = useMutation(CREATE_GROUP);
+  const [createGroup] = useMutation(CREATE_GROUP, {});
 
   useEffect(() => {
     setIsEditModalVisible(!!editingMember);

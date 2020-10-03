@@ -1,11 +1,12 @@
 import React, {FunctionComponent, useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Switch} from 'react-native';
 import {Overlay, Button, Input} from 'react-native-elements';
-import {gql, useLazyQuery} from '@apollo/client';
+import {gql} from '@apollo/client';
 import TypeAhead from '../../components/organisms/TypeAhead';
 import Label from '../../components/atoms/Label';
 import UserContext from '../../context/UserContext';
 import {MemberType} from '.';
+import useAuth from '../../hooks/useAuth';
 
 const USERS = gql`
   query FETCH_USERS($username: String) {
@@ -28,11 +29,12 @@ const EditMember: FunctionComponent<Props> = ({
   member,
 }) => {
   const {user} = useContext(UserContext);
+  const {useLazyQuery} = useAuth();
   const [selectedUser, setSelectedUser] = useState({_id: '', username: ''});
   const [alias, setAlias] = useState('');
   const [isMasked, setIsMasked] = useState(false);
 
-  const [fetchUsers, {data, loading}] = useLazyQuery(USERS);
+  const [fetchUsers, {data, loading}] = useLazyQuery(USERS, {});
 
   useEffect(() => {
     if (!member) {

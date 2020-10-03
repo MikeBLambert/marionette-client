@@ -9,13 +9,11 @@ import RootNavigator from './navigations';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App: () => React.ReactElement = () => {
-  const client = useClient();
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1}}>
         <UserProvider>
-          <ApolloProvider client={client}>
+          <ApolloProvider client={useClient()}>
             <UserContext.Consumer>
               {(context) => <RootNavigator token={context.user.token} />}
             </UserContext.Consumer>

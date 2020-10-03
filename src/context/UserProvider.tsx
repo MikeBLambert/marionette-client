@@ -12,9 +12,10 @@ const UserProvider: FunctionComponent = ({children}) => {
   }, []);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user === LOGGED_OUT_USER) {
       return;
     }
+
     AsyncStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
