@@ -24,25 +24,26 @@ interface Props {
 
 const SignIn = ({navigation}: Props) => {
   const context = useContext(UserContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [signIn, {data, error}] = useMutation(SIGN_IN);
+  const [signIn, response] = useMutation(SIGN_IN);
 
   const handleSignIn = () => {
     signIn({variables: {email, password}});
   };
 
   useEffect(() => {
-    if (!data) {
+    if (!response.data) {
       return;
     }
-    const userData = data.signIn;
+    const userData = response.data.signIn;
     const {token, user} = userData;
     const {email: userEmail, _id} = user && user;
 
     context.setUser({token, email: userEmail, _id});
-  }, [data, error, context]);
+  }, [response.data, response.error, context]);
 
   return (
     <AuthForm

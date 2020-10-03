@@ -5,8 +5,9 @@ import {ListItem} from 'react-native-elements';
 import PlusFab from '../../components/organisms/PlusFab';
 import {SCREENS} from '../../navigations/contants';
 import UserContext from '../../context/UserContext';
-import {gql, useLazyQuery} from '@apollo/client';
+import {gql} from '@apollo/client';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
+import useAuth from '../../hooks/useAuth';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -23,8 +24,14 @@ const GROUPS = gql`
 
 const Groups: FunctionComponent<Props> = ({navigation}) => {
   const {user} = useContext(UserContext);
+  const {useLazyQuery} = useAuth();
   const [fetchGroups, {data}] = useLazyQuery(GROUPS, {
     fetchPolicy: 'network-only',
+    context: {
+      headers: {
+        authorization: 'slkdfjs',
+      },
+    },
   });
 
   useFocusEffect(

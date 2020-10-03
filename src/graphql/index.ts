@@ -1,4 +1,3 @@
-import {useContext} from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,44 +5,36 @@ import {
   ApolloLink,
   split,
 } from '@apollo/client';
-// import {WebSocketLink} from '@apollo/client/link/ws';
-import {setContext} from '@apollo/client/link/context';
+import {WebSocketLink} from '@apollo/client/link/ws';
 import {onError} from '@apollo/client/link/error';
 import {getMainDefinition} from '@apollo/client/utilities';
-import UserContext from '../context/UserContext';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const useClient = () => {
-  const {user} = useContext(UserContext);
-  const authLink = setContext((_, {headers}) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: user ? `Bearer ${user.token}` : null,
-      },
-    };
-  });
-
   const errorLink = onError(
     ({response, graphQLErrors, networkError, ...rest}) => {
       console.log({response, graphQLErrors, networkError, rest});
-      // console.log({rest, graphQLErrors, networkError});
       // response.error = graphQLErrors;
     },
   );
 
   const httpLink = new HttpLink({
-    uri: 'https://10.0.0.6:4000/graphql',
+    uri: 'http://localhost:4000/graphql',
   });
 
-  // const wsLink = new WebSocketLink({
-  //   uri: 'ws://10.0.0.6/graphql',
-  //   options: {
-  //     reconnect: true,
-  //   },
-  // });
+  const wsLink = new WebSocketLink({
+    uri: 'ws://localhost:4000/graphql',
+    options: {
+      reconnect: true,
+      connectionParams: async () => {
+        const user = (await AsyncStorage.getItem('user')) || '';
+        if (!user) return;
+        return {authToken: JSON.parse(user).token};
+      },
+    },
+  });
 
   const connectionLinks = split(
-    // split based on operation type
     ({query}) => {
       const definition = getMainDefinition(query);
       return (
@@ -51,16 +42,15 @@ const useClient = () => {
         definition.operation === 'subscription'
       );
     },
-    // wsLink,
+    wsLink,
     httpLink,
   );
 
-  const link = ApolloLink.from([errorLink, authLink, connectionLinks]);
+  const link = ApolloLink.from([errorLink, connectionLinks]);
 
   const cache = new InMemoryCache({});
 
   return new ApolloClient({
-    // link: errorLink.concat(authLink.concat(httpLink)),
     link,
     cache,
   });
