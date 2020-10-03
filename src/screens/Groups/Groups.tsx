@@ -27,11 +27,6 @@ const Groups: FunctionComponent<Props> = ({navigation}) => {
   const {useLazyQuery} = useAuth();
   const [fetchGroups, {data}] = useLazyQuery(GROUPS, {
     fetchPolicy: 'network-only',
-    context: {
-      headers: {
-        authorization: 'slkdfjs',
-      },
-    },
   });
 
   useFocusEffect(

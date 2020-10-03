@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Input} from 'react-native-elements';
-import {useMutation, gql} from '@apollo/client';
+import {gql} from '@apollo/client';
 import AuthForm from '../../components/organisms/AuthForm';
 import {StackNavigationHelpers} from '@react-navigation/stack/lib/typescript/src/types';
 import UserContext from '../../context/UserContext';
 import {SCREENS} from '../../navigations/contants';
+import useAuth from '../../hooks/useAuth';
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -23,12 +24,13 @@ interface Props {
 }
 
 const SignIn = ({navigation}: Props) => {
+  const {useMutation} = useAuth();
   const context = useContext(UserContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [signIn, response] = useMutation(SIGN_IN);
+  const [signIn, response] = useMutation(SIGN_IN, {});
 
   const handleSignIn = () => {
     signIn({variables: {email, password}});

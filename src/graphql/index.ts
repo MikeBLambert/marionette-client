@@ -19,7 +19,7 @@ const useClient = () => {
   );
 
   const httpLink = new HttpLink({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'http://confido-server.us-west-2.elasticbeanstalk.com/graphql',
   });
 
   const wsLink = new WebSocketLink({

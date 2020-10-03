@@ -1,32 +1,24 @@
-import {useLazyQuery, useMutation, useQuery} from '@apollo/client';
+import {
+  LazyQueryHookOptions,
+  useLazyQuery,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
 import {useContext} from 'react';
 import UserContext from '../context/UserContext';
 
 const useAuth = () => {
   const {user} = useContext(UserContext);
   const headers = {authorization: 'Bearer ' + user.token};
+
+  const withAuth = (fn: any) => {
+    return (TAG: object, options: LazyQueryHookOptions) =>
+      fn(TAG, {...options, context: {...options.context, headers}});
+  };
   return {
-    useQuery: (TAG: any, options: any) =>
-      useQuery(TAG, {
-        ...options,
-        context: {
-          headers,
-        },
-      }),
-    useLazyQuery: (TAG: any, options: any) =>
-      useLazyQuery(TAG, {
-        ...options,
-        context: {
-          headers,
-        },
-      }),
-    useMutation: (TAG: any, options: any) =>
-      useMutation(TAG, {
-        ...options,
-        context: {
-          headers,
-        },
-      }),
+    useQuery: withAuth(useQuery),
+    useLazyQuery: withAuth(useLazyQuery),
+    useMutation: withAuth(useMutation),
   };
 };
 
