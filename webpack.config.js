@@ -81,6 +81,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './web/index.html'),
+      favicon: path.join(__dirname, './src/assets/confido_logo.png'),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
