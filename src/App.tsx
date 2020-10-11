@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {Fragment} from 'react';
+import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {ApolloProvider} from '@apollo/client';
 import UserProvider from './context/UserProvider';
@@ -21,14 +21,6 @@ const App: ({isWeb}: any) => React.ReactElement = ({isWeb}) => {
         </UserProvider>
       </SafeAreaView>
     </SafeAreaProvider>
-  );
-};
-
-export const WebApp = () => {
-  return (
-    <Fragment>
-      <App />
-    </Fragment>
   );
 };
 
