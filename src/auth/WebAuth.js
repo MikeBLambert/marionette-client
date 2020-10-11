@@ -19,6 +19,7 @@ const WebAuth = () => {
       const accessToken = await getAccessTokenSilently({
         audience: `https://${process.env.AUTH0_DOMAIN}/api/v2/`,
         scope: 'read:current_user',
+        redirect_uri: process.env.AUTH0_REDIRECT_URI,
       });
       AsyncStorage.setItem(
         'user',
