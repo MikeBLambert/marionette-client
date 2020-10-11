@@ -43,7 +43,12 @@ const WebAuth = () => {
 
   return (
     <Button
-      onPress={() => logout({redirect_uri: process.env.AUTH0_REDIRECT_URI})}
+      onPress={() =>
+        logout({
+          redirect_uri: process.env.AUTH0_REDIRECT_URI,
+          returnTo: process.env.AUTH0_REDIRECT_URI,
+        })
+      }
       title="Log Out"
     />
   );
