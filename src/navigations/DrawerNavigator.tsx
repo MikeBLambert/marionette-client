@@ -37,7 +37,6 @@ const DrawerNavigator = () => {
       drawerStyle={{
         display: isDrawerOpen ? 'flex' : 'none',
       }}
-      // drawerStyle={{height: 100, flex: 0}}
       drawerContent={() => {
         return <DrawerContent setIsDrawerOpen={setIsDrawerOpen} />;
       }}>

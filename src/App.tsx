@@ -8,14 +8,14 @@ import useClient from './graphql';
 import RootNavigator from './navigations';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-const App: () => React.ReactElement = () => {
+const App: ({isWeb}: any) => React.ReactElement = ({isWeb}) => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1}}>
         <UserProvider>
           <ApolloProvider client={useClient()}>
             <UserContext.Consumer>
-              {(context) => <RootNavigator token={context.user.token} />}
+              {() => <RootNavigator isWeb={!!isWeb} />}
             </UserContext.Consumer>
           </ApolloProvider>
         </UserProvider>

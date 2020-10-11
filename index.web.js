@@ -1,10 +1,10 @@
-// import React, {Fragment} from 'react';
 import {AppRegistry} from 'react-native';
+
 import {name as appName} from './app.json';
-import App from './src/App';
 import fontAwesomeFont from 'react-native-vector-icons/Fonts/FontAwesome.ttf';
 import antDesignFont from 'react-native-vector-icons/Fonts/AntDesign.ttf';
 import materialDesignFont from 'react-native-vector-icons/Fonts/MaterialIcons.ttf';
+import App from './web/WebApp';
 
 const iconFontStyles = `
 @font-face {

@@ -1,12 +1,11 @@
 /* eslint-disable curly */
-import React, {FunctionComponent, useState, useEffect, useContext} from 'react';
+import React, {FunctionComponent, useState, useEffect} from 'react';
 import _ from 'lodash';
 import {StyleSheet, View} from 'react-native';
 import AddThingFab from '../../components/organisms/AddThingFab';
 import EditMember from './EditMember';
 import MemberList from './MemberList';
 import {gql} from '@apollo/client';
-import UserContext from '../../context/UserContext';
 import {Input, Icon} from 'react-native-elements';
 import {SCREENS} from '../../navigations/contants';
 import {NavigationProp} from '@react-navigation/native';
@@ -33,7 +32,6 @@ export type MemberType = {
 };
 
 const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
-  const {user} = useContext(UserContext);
   const {useMutation} = useAuth();
   const [isEditVisible, setIsEditModalVisible] = useState(false);
   const [editingMember, setEditingMember] = useState('');
@@ -57,7 +55,7 @@ const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
         members: [
           ...members,
           {
-            _id: user._id,
+            // _id: user._id,
             isAdmin: true,
             isMasked: false,
             alias: 'Admin',

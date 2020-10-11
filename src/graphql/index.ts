@@ -19,17 +19,17 @@ const useClient = () => {
   );
 
   const httpLink = new HttpLink({
-    uri: 'http://confido-server.us-west-2.elasticbeanstalk.com/graphql',
+    uri: 'https://saved-reindeer-68.hasura.app/v1/graphql',
   });
 
   const wsLink = new WebSocketLink({
-    uri: 'ws://localhost:4000/graphql',
+    uri: 'wss://saved-reindeer-68.hasura.app/v1/graphql',
     options: {
       reconnect: true,
       connectionParams: async () => {
         const user = (await AsyncStorage.getItem('user')) || '';
         if (!user) return;
-        return {authToken: JSON.parse(user).token};
+        return {authToken: JSON.parse(user).authToken};
       },
     },
   });

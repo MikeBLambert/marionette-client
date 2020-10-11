@@ -14,11 +14,12 @@ const AppNavigator = () => {
         name={SCREENS.groups}
         component={Groups}
         options={({navigation}) => ({
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'left',
           headerRight: () => {
             return (
               <Icon
-                name="more-vert"
+                name="gear"
+                type="font-awesome"
                 onPress={() => navigation.toggleDrawer()}
               />
             );

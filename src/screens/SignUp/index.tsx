@@ -41,10 +41,10 @@ const SignUp = ({navigation}: Props) => {
     if (!data) {
       return;
     }
-    const userData = data.signUp;
-    const {token, user} = userData;
-    const {email: userEmail, _id} = user && user;
-    context.setUser({token, email: userEmail, _id});
+    // const userData = data.signUp;
+    // const {accessToken, user} = userData;
+    // const {email: userEmail, nickname} = user && user;
+    // context.setUser({accessToken, email: userEmail, nickname});
   }, [data, context]);
 
   return (

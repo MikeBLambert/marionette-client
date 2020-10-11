@@ -1,10 +1,9 @@
-import React, {FunctionComponent, useState, useEffect, useContext} from 'react';
+import React, {FunctionComponent, useState, useEffect} from 'react';
 import {StyleSheet, View, Switch} from 'react-native';
 import {Overlay, Button, Input} from 'react-native-elements';
 import {gql} from '@apollo/client';
 import TypeAhead from '../../components/organisms/TypeAhead';
 import Label from '../../components/atoms/Label';
-import UserContext from '../../context/UserContext';
 import {MemberType} from '.';
 import useAuth from '../../hooks/useAuth';
 
@@ -28,7 +27,6 @@ const EditMember: FunctionComponent<Props> = ({
   saveMember,
   member,
 }) => {
-  const {user} = useContext(UserContext);
   const {useLazyQuery} = useAuth();
   const [selectedUser, setSelectedUser] = useState({_id: '', username: ''});
   const [alias, setAlias] = useState('');
@@ -70,7 +68,7 @@ const EditMember: FunctionComponent<Props> = ({
   const searchResults = () =>
     data && data.users
       ? data.users
-          .filter(({_id}: {_id: string}) => _id !== user._id)
+          // .filter(({_id}: {_id: string}) => _id !== user._id)
           .map(({username, _id}: {username: string; _id: string}) => ({
             label: username,
             value: {username, _id},

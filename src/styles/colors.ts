@@ -1,2 +1,2 @@
-export const GREEN_ACTION = '#219653';
+export const PRIMARY = '#354F74';
 export const LABEL_GREY = '#86939E';

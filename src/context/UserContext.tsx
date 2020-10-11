@@ -1,17 +1,29 @@
 import {createContext, SetStateAction} from 'react';
 
+export type UserType = {
+  accessToken: string;
+  email: string;
+  nickname: string;
+  picture: string;
+  isAuthenticated: boolean;
+};
+
 interface ContextProps {
-  setUser: React.Dispatch<
-    SetStateAction<{token: string; _id: string; email: string}>
-  >;
+  setUser: React.Dispatch<SetStateAction<UserType>>;
   logOut: () => void;
-  user: {token: string; _id: string; email: string};
+  user: UserType;
 }
 
 const UserContext = createContext<ContextProps>({
   logOut: () => {},
   setUser: () => {},
-  user: {token: '', _id: '', email: ''},
+  user: {
+    accessToken: '',
+    email: '',
+    nickname: '',
+    picture: '',
+    isAuthenticated: false,
+  },
 });
 
 export default UserContext;

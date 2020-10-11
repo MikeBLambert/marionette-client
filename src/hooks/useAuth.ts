@@ -7,9 +7,14 @@ import {
 import {useContext} from 'react';
 import UserContext from '../context/UserContext';
 
-const useAuth = () => {
+const useAuth = (role = 'user') => {
   const {user} = useContext(UserContext);
-  const headers = {authorization: 'Bearer ' + user.token};
+  console.log({user});
+  const headers = {
+    Authorization: 'Bearer ' + user.accessToken,
+    'X-Hasura-Role': role,
+  };
+  console.log({headers});
 
   const withAuth = (fn: any) => {
     return (TAG: object, options: LazyQueryHookOptions) =>

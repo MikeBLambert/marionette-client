@@ -2,9 +2,17 @@ import React, {useEffect, useState, FunctionComponent} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import UserContext from './UserContext';
 
-export const LOGGED_OUT_USER = {token: '', _id: '', email: ''};
+export const LOGGED_OUT_USER = {
+  accessToken: '',
+  nickname: '',
+  email: '',
+  picture: '',
+  isAuthenticated: false,
+};
 
-const UserProvider: FunctionComponent = ({children}) => {
+interface Props {}
+
+const UserProvider: FunctionComponent<Props> = ({children}) => {
   const [user, setUser] = useState(LOGGED_OUT_USER);
 
   useEffect(() => {
@@ -12,18 +20,15 @@ const UserProvider: FunctionComponent = ({children}) => {
   }, []);
 
   useEffect(() => {
-    if (!user || user === LOGGED_OUT_USER) {
-      return;
-    }
+    if (!user || user === LOGGED_OUT_USER) return;
 
     AsyncStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
   const getUser = async () => {
     const storedUser = (await AsyncStorage.getItem('user')) || '';
-    if (!storedUser) {
-      return;
-    }
+    if (!storedUser) return;
+
     setUser(JSON.parse(storedUser));
   };
 

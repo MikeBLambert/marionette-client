@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {GREEN_ACTION} from '../../styles/colors';
+import {PRIMARY} from '../../styles/colors';
 
 interface Props {
   onPress: (props: any) => any;
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     borderRadius: 100,
-    backgroundColor: GREEN_ACTION,
+    backgroundColor: PRIMARY,
     width: 65,
     height: 65,
     justifyContent: 'center',
