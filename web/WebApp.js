@@ -8,7 +8,7 @@ const WebApp = () => {
     <Auth0Provider
       domain={process.env.AUTH0_DOMAIN}
       clientId={process.env.AUTH0_CLIENT_ID}
-      redirectUri={window.location.origin}
+      redirectUri={process.env.AUTH0_REDIRECT_URI}
       scope="read:current_user update:current_user_metadata"
       audience={process.env.AUTH0_AUDIENCE}>
       <App isWeb /> <WebAuth />
