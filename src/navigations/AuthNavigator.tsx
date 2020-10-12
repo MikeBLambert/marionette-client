@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import SignIn from '../auth/MobileAuth';
 import SignUp from '../screens/SignUp';
-import {SCREENS} from './contants';
+import {SCREENS} from './constants';
 
 const Stack = createStackNavigator();
 const AuthNavigator = () => {

@@ -4,8 +4,8 @@ import {gql} from '@apollo/client';
 import {StackNavigationHelpers} from '@react-navigation/stack/lib/typescript/src/types';
 import AuthForm from '../../components/organisms/AuthForm';
 import UserContext from '../../context/UserContext';
-import {SCREENS} from '../../navigations/contants';
-import useAuth from '../../hooks/useAuth';
+import {SCREENS} from '../../navigations/constants';
+import useRequest from '../../hooks/useRequest';
 
 const SIGN_UP = gql`
   mutation SignUp($email: String!, $password: String!, $username: String!) {
@@ -26,7 +26,7 @@ interface Props {
 
 const SignUp = ({navigation}: Props) => {
   const context = useContext(UserContext);
-  const {useMutation} = useAuth();
+  const {useMutation} = useRequest();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {useAuth0} from '@auth0/auth0-react';
-import {ActivityIndicator, Button} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const WebAuth = () => {
@@ -8,7 +8,6 @@ const WebAuth = () => {
     loginWithRedirect,
     user,
     isLoading,
-    logout,
     isAuthenticated,
     getAccessTokenSilently,
   } = useAuth0();
@@ -23,7 +22,7 @@ const WebAuth = () => {
       });
       AsyncStorage.setItem(
         'user',
-        JSON.stringify({...user, accessToken, isAuthenticated}),
+        JSON.stringify({...user, accessToken, isAuthenticated, isWeb: true}),
       );
     } catch (e) {
       console.log(e.message);
@@ -41,17 +40,7 @@ const WebAuth = () => {
 
   if (isLoading) return <ActivityIndicator />;
 
-  return (
-    <Button
-      onPress={() =>
-        logout({
-          redirect_uri: process.env.AUTH0_REDIRECT_URI,
-          returnTo: process.env.AUTH0_REDIRECT_URI,
-        })
-      }
-      title="Log Out"
-    />
-  );
+  return <Fragment />;
 };
 
 export default WebAuth;

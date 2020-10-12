@@ -5,7 +5,7 @@ import {gql} from '@apollo/client';
 import TypeAhead from '../../components/organisms/TypeAhead';
 import Label from '../../components/atoms/Label';
 import {MemberType} from '.';
-import useAuth from '../../hooks/useAuth';
+import useRequest from '../../hooks/useRequest';
 
 const USERS = gql`
   query FETCH_USERS($username: String) {
@@ -27,7 +27,7 @@ const EditMember: FunctionComponent<Props> = ({
   saveMember,
   member,
 }) => {
-  const {useLazyQuery} = useAuth();
+  const {useLazyQuery} = useRequest();
   const [selectedUser, setSelectedUser] = useState({_id: '', username: ''});
   const [alias, setAlias] = useState('');
   const [isMasked, setIsMasked] = useState(false);

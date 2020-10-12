@@ -6,6 +6,7 @@ export type UserType = {
   nickname: string;
   picture: string;
   isAuthenticated: boolean;
+  isWeb: boolean;
 };
 
 interface ContextProps {
@@ -23,6 +24,7 @@ const UserContext = createContext<ContextProps>({
     nickname: '',
     picture: '',
     isAuthenticated: false,
+    isWeb: false,
   },
 });
 

@@ -1,29 +1,30 @@
-import {
-  LazyQueryHookOptions,
-  useLazyQuery,
-  useMutation,
-  useQuery,
-} from '@apollo/client';
 import {useContext} from 'react';
+import {useAuth0} from '@auth0/auth0-react';
+import Auth0 from 'react-native-auth0';
+import {AUTH0_REDIRECT_URI, AUTH0_DOMAIN, AUTH0_CLIENT_ID} from '@env';
 import UserContext from '../context/UserContext';
 
-const useAuth = (role = 'user') => {
-  const {user} = useContext(UserContext);
-  console.log({user});
-  const headers = {
-    Authorization: 'Bearer ' + user.accessToken,
-    'X-Hasura-Role': role,
-  };
-  console.log({headers});
+const useAuth = () => {
+  const {
+    user: {isWeb},
+  } = useContext(UserContext);
+  const {logout} = useAuth0();
+  if (isWeb)
+    return {
+      logout: () =>
+        logout({
+          returnTo: AUTH0_REDIRECT_URI,
+        }),
+    };
 
-  const withAuth = (fn: any) => {
-    return (TAG: object, options: LazyQueryHookOptions) =>
-      fn(TAG, {...options, context: {...options.context, headers}});
-  };
+  const auth0 = new Auth0({
+    domain: AUTH0_DOMAIN,
+    clientId: AUTH0_CLIENT_ID,
+  });
   return {
-    useQuery: withAuth(useQuery),
-    useLazyQuery: withAuth(useLazyQuery),
-    useMutation: withAuth(useMutation),
+    logout: () => {
+      auth0.webAuth.clearSession();
+    },
   };
 };
 

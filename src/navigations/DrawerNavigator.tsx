@@ -1,16 +1,16 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createDrawerNavigator, useIsDrawerOpen} from '@react-navigation/drawer';
 import AppNavigator from './AppNavigator';
-import UserContext from '../context/UserContext';
 import {View} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import {SCREENS} from './contants';
+import {SCREENS} from './constants';
+import useAuth from '../hooks/useAuth';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerContent = ({setIsDrawerOpen}: {setIsDrawerOpen: any}) => {
   const isOpen = useIsDrawerOpen();
-  const context = useContext(UserContext);
+  const {logout} = useAuth();
   useEffect(() => {
     setIsDrawerOpen(isOpen);
   }, [isOpen]);
@@ -19,7 +19,7 @@ const DrawerContent = ({setIsDrawerOpen}: {setIsDrawerOpen: any}) => {
       <ListItem title="Settings" bottomDivider>
         Settings
       </ListItem>
-      <ListItem title="Log Out" onPress={() => context.logOut()}>
+      <ListItem title="Log Out" onPress={logout}>
         Log Out
       </ListItem>
     </View>

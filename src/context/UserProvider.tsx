@@ -8,9 +8,12 @@ export const LOGGED_OUT_USER = {
   email: '',
   picture: '',
   isAuthenticated: false,
+  isWeb: false,
 };
 
-interface Props {}
+interface Props {
+  isWeb: boolean;
+}
 
 const UserProvider: FunctionComponent<Props> = ({children}) => {
   const [user, setUser] = useState(LOGGED_OUT_USER);

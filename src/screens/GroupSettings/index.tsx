@@ -7,9 +7,9 @@ import EditMember from './EditMember';
 import MemberList from './MemberList';
 import {gql} from '@apollo/client';
 import {Input, Icon} from 'react-native-elements';
-import {SCREENS} from '../../navigations/contants';
+import {SCREENS} from '../../navigations/constants';
 import {NavigationProp} from '@react-navigation/native';
-import useAuth from '../../hooks/useAuth';
+import useRequest from '../../hooks/useRequest';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -32,7 +32,7 @@ export type MemberType = {
 };
 
 const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
-  const {useMutation} = useAuth();
+  const {useMutation} = useRequest();
   const [isEditVisible, setIsEditModalVisible] = useState(false);
   const [editingMember, setEditingMember] = useState('');
   const [name, setName] = useState('');

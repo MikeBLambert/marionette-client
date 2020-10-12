@@ -3,11 +3,11 @@ import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
 import PlusFab from '../../components/organisms/PlusFab';
-import {SCREENS} from '../../navigations/contants';
+import {SCREENS} from '../../navigations/constants';
 // import UserContext from '../../context/UserContext';
 import {gql} from '@apollo/client';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
-import useAuth from '../../hooks/useAuth';
+import useRequest from '../../hooks/useRequest';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -51,7 +51,7 @@ const USERS = gql`
 
 const Groups: FunctionComponent<Props> = ({navigation}) => {
   // const {user} = useContext(UserContext);
-  const {useLazyQuery, useQuery} = useAuth();
+  const {useLazyQuery, useQuery} = useRequest();
   const {data: data2, error} = useQuery(USERS, {fetchPolicy: 'network-only'});
   console.log({data2, error});
   const [fetchGroups, {data}] = useLazyQuery(GROUPS, {
