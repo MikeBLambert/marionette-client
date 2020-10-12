@@ -15,7 +15,7 @@ const App: ({isWeb}: any) => React.ReactElement = ({isWeb}) => {
         <UserProvider isWeb={!!isWeb}>
           <ApolloProvider client={useClient()}>
             <UserContext.Consumer>
-              {() => <RootNavigator isWeb={!!isWeb} />}
+              {() => <RootNavigator />}
             </UserContext.Consumer>
           </ApolloProvider>
         </UserProvider>
