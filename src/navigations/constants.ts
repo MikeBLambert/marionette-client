@@ -1,4 +1,4 @@
-import {AUTH0_REDIRECT_URI} from '@env';
+// import {AUTH0_REDIRECT_URI} from '@env';
 
 export const SCREENS = {
   groups: 'Groups',
@@ -8,7 +8,7 @@ export const SCREENS = {
 };
 
 export const LINKING = {
-  prefixes: [AUTH0_REDIRECT_URI],
+  prefixes: ['https://master.d2d97pige1k70j.amplifyapp.com'],
   config: {
     screens: {
       [SCREENS.groups]: '',
