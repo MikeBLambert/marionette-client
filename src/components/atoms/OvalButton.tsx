@@ -1,9 +1,13 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {PRIMARY} from '../../styles/colors';
 
 interface Props {
-  onPress: (props: any) => any;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const OvalButton: FunctionComponent<Props> = ({children, onPress}) => {

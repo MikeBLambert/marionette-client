@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 const useClient = () => {
   const errorLink = onError(
     ({response, graphQLErrors, networkError, ...rest}) => {
+      // TO_DO: implement global error handling.
       console.log({response, graphQLErrors, networkError, rest});
       // response.error = graphQLErrors;
     },

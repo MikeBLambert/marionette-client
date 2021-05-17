@@ -9,7 +9,6 @@ import UserContext from '../context/UserContext';
 
 const useRequest = (role = 'user') => {
   const {user} = useContext(UserContext);
-  console.log({user});
   const headers = {
     Authorization: 'Bearer ' + user.accessToken,
     'X-Hasura-Role': role,

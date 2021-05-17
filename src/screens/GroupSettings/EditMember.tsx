@@ -1,4 +1,9 @@
-import React, {FunctionComponent, useState, useEffect} from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import {StyleSheet, View, Switch} from 'react-native';
 import {Overlay, Button, Input} from 'react-native-elements';
 import {gql} from '@apollo/client';
@@ -43,9 +48,12 @@ const EditMember: FunctionComponent<Props> = ({
     setIsMasked(member.isMasked);
   }, [member]);
 
-  const doTypeAheadSearch = (value: string) => {
-    fetchUsers({variables: {username: value}});
-  };
+  const doTypeAheadSearch = useCallback(
+    (value: string) => {
+      fetchUsers({variables: {username: value}});
+    },
+    [fetchUsers],
+  );
 
   const handleSave = () => {
     saveMember({
@@ -67,12 +75,10 @@ const EditMember: FunctionComponent<Props> = ({
 
   const searchResults = () =>
     data && data.users
-      ? data.users
-          // .filter(({_id}: {_id: string}) => _id !== user._id)
-          .map(({username, _id}: {username: string; _id: string}) => ({
-            label: username,
-            value: {username, _id},
-          }))
+      ? data.users.map(({username, _id}: {username: string; _id: string}) => ({
+          label: username,
+          value: {username, _id},
+        }))
       : [];
 
   return (

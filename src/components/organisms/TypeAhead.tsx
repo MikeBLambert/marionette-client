@@ -6,7 +6,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 type SearchResultsType = {
   label: string;
-  value: any;
+  value: {username: string; _id: string};
 };
 interface Props {
   initialValue: string;
@@ -16,7 +16,7 @@ interface Props {
   placeholder: string;
   label: string;
   loading: boolean;
-  handleSelect: (params: any) => void;
+  handleSelect: (params: SearchResultsType) => void;
 }
 
 const TypeAhead: FunctionComponent<Props> = ({
@@ -29,8 +29,8 @@ const TypeAhead: FunctionComponent<Props> = ({
   loading,
   handleSelect,
 }) => {
-  const [inputValue, setInputValue] = useState('');
-  const [showResults, setShowResults] = useState(false);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [showResults, setShowResults] = useState<boolean>(false);
   const debouncedInputValue = useDebounce(inputValue, searchDelay);
 
   useEffect(() => {
@@ -45,13 +45,12 @@ const TypeAhead: FunctionComponent<Props> = ({
       return;
     }
     doSearch(debouncedInputValue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showResults, debouncedInputValue]);
+  }, [showResults, debouncedInputValue, doSearch]);
 
   const handleInputChange = (text: string) => {
     setShowResults(text.length >= 3);
     setInputValue(text);
-    handleSelect({value: {username: '', _id: ''}});
+    handleSelect({value: {username: '', _id: ''}, label: ''});
   };
 
   const handlePress = ({label: resultsLabel, value}: SearchResultsType) => {
@@ -75,12 +74,11 @@ const TypeAhead: FunctionComponent<Props> = ({
       searchResults.map(({label: resultsLabel, value}, i) => (
         <ListItem
           key={`${resultsLabel}-${i}`}
-          children={{}}
           bottomDivider
           topDivider
-          title={resultsLabel}
-          onPress={() => handlePress({label: resultsLabel, value})}
-        />
+          onPress={() => handlePress({label: resultsLabel, value})}>
+          {resultsLabel}
+        </ListItem>
       ))
     ) : (
       <Text>No Results</Text>

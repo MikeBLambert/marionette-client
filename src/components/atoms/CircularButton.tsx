@@ -1,9 +1,13 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {PRIMARY} from '../../styles/colors';
 
 interface Props {
-  onPress: (props: any) => any;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const CicularButton: FunctionComponent<Props> = ({children, onPress}) => {
@@ -31,7 +35,6 @@ const styles = StyleSheet.create({
     width: 65,
     height: 65,
     justifyContent: 'center',
-    // alignSelf: 'flex-end',
     bottom: 20,
     right: 20,
     zIndex: 50,

@@ -8,7 +8,7 @@ import useClient from './graphql';
 import RootNavigator from './navigations';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-const App: ({isWeb}: any) => React.ReactElement = ({isWeb}) => {
+const App: ({isWeb}: {isWeb?: boolean}) => React.ReactElement = ({isWeb}) => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1}}>

@@ -11,12 +11,21 @@ export const LOGGED_OUT_USER = {
   isWeb: false,
 };
 
+type UserType = {
+  accessToken: string;
+  nickname: string;
+  email: string;
+  picture: string;
+  isAuthenticated: boolean;
+  isWeb: boolean;
+};
+
 interface Props {
   isWeb: boolean;
 }
 
 const UserProvider: FunctionComponent<Props> = ({children}) => {
-  const [user, setUser] = useState(LOGGED_OUT_USER);
+  const [user, setUser] = useState<UserType>(LOGGED_OUT_USER);
 
   useEffect(() => {
     getUser();

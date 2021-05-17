@@ -1,11 +1,11 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {GestureResponderEvent, StyleSheet, Text} from 'react-native';
 import OvalFab from '../molecules/OvalFab';
 import {Icon} from 'react-native-elements';
 
 interface Props {
   buttonText: string;
-  onPress: () => any;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const AddThingFab: FunctionComponent<Props> = ({onPress, buttonText}) => {

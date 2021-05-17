@@ -1,9 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {GestureResponderEvent, StyleSheet, View} from 'react-native';
 import OvalButton from '../atoms/OvalButton';
 
 interface Props {
-  onPress: () => any;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const OvalFab: FunctionComponent<Props> = ({onPress, children}) => {

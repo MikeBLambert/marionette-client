@@ -1,5 +1,9 @@
-/* eslint-disable curly */
-import React, {FunctionComponent, useState, useEffect} from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import _ from 'lodash';
 import {StyleSheet, View} from 'react-native';
 import AddThingFab from '../../components/organisms/AddThingFab';
@@ -33,9 +37,9 @@ export type MemberType = {
 
 const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
   const {useMutation} = useRequest();
-  const [isEditVisible, setIsEditModalVisible] = useState(false);
-  const [editingMember, setEditingMember] = useState('');
-  const [name, setName] = useState('');
+  const [isEditVisible, setIsEditModalVisible] = useState<boolean>(false);
+  const [editingMember, setEditingMember] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [memberData, setMemberData] = useState<{[key: string]: MemberType}>({});
   const [createGroup] = useMutation(CREATE_GROUP, {});
 
@@ -43,8 +47,8 @@ const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
     setIsEditModalVisible(!!editingMember);
   }, [editingMember]);
 
-  const handleSave = () => {
-    const members = Object.values(memberData).map(({username, ...member}) => ({
+  const handleSave = useCallback(() => {
+    const members = Object.values(memberData).map((member) => ({
       ...member,
       isAdmin: false,
     }));
@@ -55,7 +59,6 @@ const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
         members: [
           ...members,
           {
-            // _id: user._id,
             isAdmin: true,
             isMasked: false,
             alias: 'Admin',
@@ -63,7 +66,7 @@ const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
         ],
       },
     });
-  };
+  }, [createGroup, name, memberData]);
 
   useEffect(() => {
     const isSaveDisabled = !name || _.isEmpty(memberData);
@@ -84,8 +87,7 @@ const GroupSettings: FunctionComponent<Props> = ({navigation}) => {
         );
       },
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [memberData, navigation, name]);
+  }, [memberData, navigation, name, handleSave]);
 
   const [showAll, setShowAll] = useState(false);
   const handleShowAll = (value: boolean) => {

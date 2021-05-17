@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {Fragment, FunctionComponent} from 'react';
 import {Switch} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 
@@ -22,22 +22,16 @@ const MemberListItem: FunctionComponent<Props> = ({
   onPress,
 }) => {
   return (
-    <ListItem
-      onPress={onPress}
-      key={id}
-      children={{}}
-      bottomDivider
-      title={`${username} (${alias})`}
-      leftElement={
+    <ListItem onPress={onPress} key={id} bottomDivider>
+      <Fragment>
         <Switch
           value={isMasked}
           onValueChange={() => onSwitchValueChange(id)}
         />
-      }
-      rightElement={
+        {`${username} (${alias})`}{' '}
         <Icon onPress={() => onRemove(id)} name="remove-circle" color="red" />
-      }
-    />
+      </Fragment>
+    </ListItem>
   );
 };
 

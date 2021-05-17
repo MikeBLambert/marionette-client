@@ -8,26 +8,26 @@ import useAuth from '../hooks/useAuth';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerContent = ({setIsDrawerOpen}: {setIsDrawerOpen: any}) => {
+const DrawerContent = ({
+  setIsDrawerOpen,
+}: {
+  setIsDrawerOpen: (isOpenArgument: boolean) => void;
+}) => {
   const isOpen = useIsDrawerOpen();
   const {logout} = useAuth();
   useEffect(() => {
     setIsDrawerOpen(isOpen);
-  }, [isOpen]);
+  }, [isOpen, setIsDrawerOpen]);
   return (
     <View>
-      <ListItem title="Settings" bottomDivider>
-        Settings
-      </ListItem>
-      <ListItem title="Log Out" onPress={logout}>
-        Log Out
-      </ListItem>
+      <ListItem bottomDivider>Settings</ListItem>
+      <ListItem onPress={logout}>Log Out</ListItem>
     </View>
   );
 };
 
 const DrawerNavigator = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   return (
     <Drawer.Navigator
       initialRouteName={SCREENS.groups}

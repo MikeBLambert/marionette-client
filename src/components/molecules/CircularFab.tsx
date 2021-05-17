@@ -1,9 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {GestureResponderEvent, StyleSheet, View} from 'react-native';
 import CicularButton from '../atoms/CircularButton';
 
 interface Props {
-  onPress: (props: any) => any;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const CircularFab: FunctionComponent<Props> = ({onPress, children}) => {
